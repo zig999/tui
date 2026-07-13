@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/*
+  Design tokens — Tailwind v4 CSS-first (@theme). No tailwind.config.ts.
+
+  Layering (see CLAUDE.md → Tailwind CSS v4):
+    base      → raw values (never referenced by components)
+    semantic  → purpose-named tokens (the ONLY source components may reference)
+    component → per-variant tokens (defined in component files, must reference semantic)
+
+  GOTCHA #2 — two border namespaces:
+    --color-border-* → border COLOR
+    --border-*       → border WIDTH
+  Mixing them silently drops the border. They are intentionally kept separate below.
+*/
+
+@theme {
+  /* ── base: raw palette (OKLCH) ─────────────────────────────────────────── */
+  --color-white: oklch(100% 0 0);
+  --color-black: oklch(0% 0 0);
+  --color-neutral-50: oklch(98.5% 0 0);
+  --color-neutral-100: oklch(97% 0 0);
+  --color-neutral-200: oklch(92.2% 0 0);
+  --color-neutral-500: oklch(55.6% 0 0);
+  --color-neutral-800: oklch(26.9% 0 0);
+  --color-neutral-900: oklch(20.5% 0 0);
+  --color-brand-500: oklch(62.3% 0.214 259.8);
+  --color-brand-600: oklch(54.6% 0.245 262.9);
+  --color-danger-500: oklch(63.7% 0.237 25.3);
+
+  /* ── semantic: purpose (components reference ONLY these) ───────────────── */
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-neutral-900);
+  --color-muted: var(--color-neutral-100);
+  --color-muted-foreground: var(--color-neutral-500);
+
+  --color-primary: var(--color-brand-600);
+  --color-primary-foreground: var(--color-white);
+
+  --color-destructive: var(--color-danger-500);
+  --color-destructive-foreground: var(--color-white);
+
+  /* border COLOR namespace (--color-border-*) */
+  --color-border: var(--color-neutral-200);
+  --color-ring: var(--color-brand-500);
+
+  /* border WIDTH namespace (--border-*) — NOT a color */
+  --border-DEFAULT: 1px;
+
+  /* radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* container-query scale (reusable components sized by their container) */
+  --container-xs: 20rem;
+  --container-sm: 24rem;
+  --container-md: 28rem;
+  --container-lg: 32rem;
+}
+
+/*
+  GOTCHA #3 (RESOLVED) — named spacing tokens shadowed the container scale.
+  Fix: non-layered .max-w-* / .min-w-* rules driven by --container-*.
+  Do NOT convert these to @utility.
+*/
+.max-w-xs { max-width: var(--container-xs); }
+.max-w-sm { max-width: var(--container-sm); }
+.max-w-md { max-width: var(--container-md); }
+.max-w-lg { max-width: var(--container-lg); }
+
+:root {
+  color-scheme: light;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}

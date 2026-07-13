@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+frontend/dist/
+frontend/storybook-static/
+
+# Test / tooling caches
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
+frontend/.vite/
+
+# Env / secrets
+.env
+.env.local
+*.pem
+*.key
+*.p12
+secrets.*
+credentials.*
+
+# Orchestration engine runtime state — never commit
+.orch/
+
+# Ephemeral runtime traces
+docs/runtime/
+
+# OS / editor
+.DS_Store
+*.log
+*Zone.Identifier
