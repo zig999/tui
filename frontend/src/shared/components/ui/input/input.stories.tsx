@@ -3,7 +3,7 @@ import { expect, userEvent, fn, within } from "storybook/test";
 import { Input } from "./input";
 
 const meta = {
-  title: "UI/Input",
+  title: "Forms/Input",
   component: Input,
   parameters: { layout: "centered" },
   args: { placeholder: "digite algo...", onChange: fn() },

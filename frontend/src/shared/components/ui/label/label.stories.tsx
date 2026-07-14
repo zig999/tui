@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Label } from "./label";
 
 const meta = {
-  title: "UI/Label",
+  title: "Forms/Label",
   component: Label,
   parameters: { layout: "centered" },
   args: { children: "Email address" },

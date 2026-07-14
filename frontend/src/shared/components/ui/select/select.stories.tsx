@@ -10,7 +10,7 @@ const options: SelectOption[] = [
 ];
 
 const meta = {
-  title: "UI/Select",
+  title: "Forms/Select",
   component: Select,
   parameters: { layout: "centered" },
   args: {

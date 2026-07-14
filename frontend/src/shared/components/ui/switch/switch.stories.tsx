@@ -5,7 +5,7 @@ import { Switch } from "./switch";
 import type { SwitchProps } from "./switch.types";
 
 const meta = {
-  title: "UI/Switch",
+  title: "Forms/Switch",
   component: Switch,
   parameters: { layout: "centered" },
   args: { checked: false, onChange: fn(), label: "Notificações" },

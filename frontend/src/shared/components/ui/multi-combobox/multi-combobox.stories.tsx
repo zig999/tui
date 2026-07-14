@@ -30,7 +30,7 @@ function ControlledMultiCombobox(props: ComponentProps<typeof MultiCombobox>) {
 }
 
 const meta = {
-  title: "UI/MultiCombobox",
+  title: "Forms/MultiCombobox",
   component: MultiCombobox,
   parameters: { layout: "centered" },
   args: {

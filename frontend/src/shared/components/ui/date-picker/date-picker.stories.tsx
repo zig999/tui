@@ -3,7 +3,7 @@ import { expect, userEvent, fn, within } from "storybook/test";
 import { DatePicker } from "./date-picker";
 
 const meta = {
-  title: "UI/DatePicker",
+  title: "Forms/DatePicker",
   component: DatePicker,
   parameters: { layout: "centered" },
   args: {

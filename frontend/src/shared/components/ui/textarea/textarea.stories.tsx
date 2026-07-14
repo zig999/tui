@@ -3,7 +3,7 @@ import { expect, userEvent, fn, within } from "storybook/test";
 import { Textarea } from "./textarea";
 
 const meta = {
-  title: "UI/Textarea",
+  title: "Forms/Textarea",
   component: Textarea,
   parameters: { layout: "centered" },
   args: { placeholder: "digite algo...", onChange: fn() },

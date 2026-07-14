@@ -10,7 +10,7 @@ const people: PersonPickerOption[] = [
 ];
 
 const meta = {
-  title: "UI/PersonPicker",
+  title: "Forms/PersonPicker",
   component: PersonPicker,
   parameters: { layout: "centered" },
   args: {

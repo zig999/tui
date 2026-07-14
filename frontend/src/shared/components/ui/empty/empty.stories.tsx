@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Empty } from "./empty";
 
 const meta = {
-  title: "UI/Empty",
+  title: "Feedback/Empty",
   component: Empty,
   parameters: { layout: "centered" },
   args: {

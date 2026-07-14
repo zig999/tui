@@ -5,7 +5,7 @@ import { RadioGroup, RadioGroupItem } from "./radio-group";
 import type { RadioGroupProps } from "./radio-group.types";
 
 const meta = {
-  title: "UI/RadioGroup",
+  title: "Forms/RadioGroup",
   component: RadioGroup,
   parameters: { layout: "centered" },
   args: { name: "plan", value: "free", onValueChange: fn() },

@@ -3,7 +3,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 
 const meta = {
-  title: "UI/Tabs",
+  title: "Navigation/Tabs",
   component: Tabs,
   parameters: { layout: "centered" },
   args: { defaultValue: "profile" },

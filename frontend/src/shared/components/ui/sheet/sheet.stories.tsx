@@ -30,7 +30,7 @@ function SheetDemo() {
 }
 
 const meta = {
-  title: "UI/Sheet",
+  title: "Overlays/Sheet",
   component: Sheet,
   parameters: { layout: "centered" },
   // Sheet's props are all required; the stories drive it via <SheetDemo />, so

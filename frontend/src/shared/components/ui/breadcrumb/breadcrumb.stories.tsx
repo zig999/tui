@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Breadcrumb } from "./breadcrumb";
 
 const meta = {
-  title: "UI/Breadcrumb",
+  title: "Navigation/Breadcrumb",
   component: Breadcrumb,
   parameters: { layout: "centered" },
   args: {

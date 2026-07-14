@@ -5,7 +5,7 @@ import { Checkbox } from "./checkbox";
 import type { CheckboxProps } from "./checkbox.types";
 
 const meta = {
-  title: "UI/Checkbox",
+  title: "Forms/Checkbox",
   component: Checkbox,
   parameters: { layout: "centered" },
   args: { checked: false, onChange: fn(), children: "Aceito os termos" },

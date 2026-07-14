@@ -3,7 +3,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { Link } from "./link";
 
 const meta = {
-  title: "UI/Link",
+  title: "Navigation/Link",
   component: Link,
   parameters: { layout: "centered" },
   args: { href: "#", children: "View details" },

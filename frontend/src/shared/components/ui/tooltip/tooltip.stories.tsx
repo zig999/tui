@@ -3,7 +3,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { Tooltip, TooltipProvider } from "./tooltip";
 
 const meta = {
-  title: "UI/Tooltip",
+  title: "Overlays/Tooltip",
   component: Tooltip,
   parameters: { layout: "centered" },
   decorators: [

@@ -3,7 +3,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { Alert } from "./alert";
 
 const meta = {
-  title: "UI/Alert",
+  title: "Feedback/Alert",
   component: Alert,
   parameters: { layout: "centered" },
   args: {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Skeleton } from "./skeleton";
 
 const meta = {
-  title: "UI/Skeleton",
+  title: "Feedback/Skeleton",
   component: Skeleton,
   parameters: { layout: "centered" },
   args: { className: "h-4 w-40" },

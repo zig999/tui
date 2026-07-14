@@ -3,7 +3,7 @@ import { expect, userEvent, fn, within } from "storybook/test";
 import { Card } from "./card";
 
 const meta = {
-  title: "UI/Card",
+  title: "Data Display/Card",
   component: Card,
   parameters: { layout: "centered" },
   args: {
