@@ -3,6 +3,11 @@
 /*
   Design tokens — Tailwind v4 CSS-first (@theme). No tailwind.config.ts.
 
+  Visual personality: TUI / old CRT terminal — green phosphor on near-black,
+  monospace everywhere, sharp corners, box borders, subtle scanline + glow.
+  Inspired by WebTUI (https://webtui.ironclad.sh) but expressed through our own
+  semantic tokens + Component Contract (no attribute-selector fork).
+
   Layering (see CLAUDE.md → Tailwind CSS v4):
     base      → raw values (never referenced by components)
     semantic  → purpose-named tokens (the ONLY source components may reference)
@@ -11,46 +16,61 @@
   GOTCHA #2 — two border namespaces:
     --color-border-* → border COLOR
     --border-*       → border WIDTH
-  Mixing them silently drops the border. They are intentionally kept separate below.
+  Mixing them silently drops the border. They are kept separate below.
 */
 
 @theme {
-  /* ── base: raw palette (OKLCH) ─────────────────────────────────────────── */
-  --color-white: oklch(100% 0 0);
-  --color-black: oklch(0% 0 0);
-  --color-neutral-50: oklch(98.5% 0 0);
-  --color-neutral-100: oklch(97% 0 0);
-  --color-neutral-200: oklch(92.2% 0 0);
-  --color-neutral-500: oklch(55.6% 0 0);
-  --color-neutral-800: oklch(26.9% 0 0);
-  --color-neutral-900: oklch(20.5% 0 0);
-  --color-brand-500: oklch(62.3% 0.214 259.8);
-  --color-brand-600: oklch(54.6% 0.245 262.9);
-  --color-danger-500: oklch(63.7% 0.237 25.3);
+  /* ── base: phosphor CRT palette ────────────────────────────────────────── */
+  --color-black: #000000;
+
+  --color-term-bg-0: #060a06; /* deepest — sunken / inputs */
+  --color-term-bg-1: #0a0f0a; /* app background (preto esverdeado) */
+  --color-term-bg-2: #101710; /* surface / muted panels */
+  --color-term-bg-3: #16221a; /* raised / hover */
+
+  --color-term-green-dim: #00cc44; /* dim phosphor — secondary text */
+  --color-term-green: #33ff66; /* primary phosphor — body text */
+  --color-term-green-bright: #aaffaa; /* bright phosphor — headings / accent */
+
+  --color-term-red: #ff5555; /* error */
+  --color-term-amber: #ffb000; /* warning */
+
+  --color-term-border: #1f3d29; /* dim green rule */
 
   /* ── semantic: purpose (components reference ONLY these) ───────────────── */
-  --color-background: var(--color-white);
-  --color-foreground: var(--color-neutral-900);
-  --color-muted: var(--color-neutral-100);
-  --color-muted-foreground: var(--color-neutral-500);
+  --color-background: var(--color-term-bg-1);
+  --color-surface: var(--color-term-bg-2);
+  --color-foreground: var(--color-term-green);
+  --color-muted: var(--color-term-bg-2);
+  --color-muted-foreground: var(--color-term-green-dim);
+  --color-accent: var(--color-term-green-bright);
 
-  --color-primary: var(--color-brand-600);
-  --color-primary-foreground: var(--color-white);
+  --color-primary: var(--color-term-green);
+  --color-primary-foreground: var(--color-term-bg-0); /* black text on green */
 
-  --color-destructive: var(--color-danger-500);
-  --color-destructive-foreground: var(--color-white);
+  --color-destructive: var(--color-term-red);
+  --color-destructive-foreground: var(--color-term-bg-0);
+
+  --color-warning: var(--color-term-amber);
 
   /* border COLOR namespace (--color-border-*) */
-  --color-border: var(--color-neutral-200);
-  --color-ring: var(--color-brand-500);
+  --color-border: var(--color-term-border);
+  --color-ring: var(--color-term-green);
 
   /* border WIDTH namespace (--border-*) — NOT a color */
   --border-DEFAULT: 1px;
 
-  /* radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+  /* radius — sharp corners, no rounding (old terminal) */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+
+  /* typography — monospace everywhere. --font-sans is aliased to mono so the
+     default Tailwind font stack is monospace too. */
+  --font-mono:
+    "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SFMono-Regular",
+    "Cascadia Code", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-sans: var(--font-mono);
 
   /* container-query scale (reusable components sized by their container) */
   --container-xs: 20rem;
@@ -69,8 +89,49 @@
 .max-w-md { max-width: var(--container-md); }
 .max-w-lg { max-width: var(--container-lg); }
 
+/* ── base document + CRT phosphor glow ───────────────────────────────────── */
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   background-color: var(--color-background);
   color: var(--color-foreground);
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+  /* Phosphor glow — matches each element's own text color via currentColor. */
+  text-shadow:
+    0 0 1px currentColor,
+    0 0 4px color-mix(in srgb, currentColor 30%, transparent);
+}
+
+/*
+  Scanline overlay — subtle CRT effect over the whole viewport.
+  Non-interactive; drawn above content but never captures pointer events.
+*/
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0.25) 0 1px,
+    transparent 1px 3px
+  );
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+}
+
+/* Escape hatch: <html data-crt="off"> disables glow + scanlines. */
+:root[data-crt="off"] {
+  text-shadow: none;
+}
+:root[data-crt="off"] body::after {
+  content: none;
+}
+
+/* Respect reduced-motion / reduced-transparency preferences: drop the overlay. */
+@media (prefers-reduced-transparency: reduce) {
+  body::after {
+    content: none;
+  }
 }
