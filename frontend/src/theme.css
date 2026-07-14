@@ -32,6 +32,7 @@
   --color-term-green: #33ff66; /* primary phosphor — body text */
   --color-term-green-bright: #aaffaa; /* bright phosphor — headings / accent */
 
+  --color-term-cyan: #33e0e0; /* secondary accent — info / data */
   --color-term-red: #ff5555; /* error */
   --color-term-amber: #ffb000; /* warning */
 
@@ -53,17 +54,33 @@
 
   --color-warning: var(--color-term-amber);
 
+  /* raised / interactive surfaces */
+  --color-elevated: var(--color-term-bg-3);
+  --color-hover: var(--color-term-bg-3);
+  --color-zebra: var(--color-term-bg-2); /* table zebra striping */
+
+  /* intent accents (info/success reuse the phosphor scale) */
+  --color-info: var(--color-term-cyan);
+  --color-success: var(--color-term-green);
+
+  /* primary interaction states */
+  --color-primary-hover: var(--color-term-green-bright);
+  --color-primary-active: var(--color-term-green-dim);
+
   /* border COLOR namespace (--color-border-*) */
   --color-border: var(--color-term-border);
+  --color-border-strong: var(--color-term-green-dim); /* hover / interactive rule */
   --color-ring: var(--color-term-green);
 
   /* border WIDTH namespace (--border-*) — NOT a color */
   --border-DEFAULT: 1px;
 
   /* radius — sharp corners, no rounding (old terminal) */
+  --radius-xs: 0px;
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
+  --radius-xl: 0px;
 
   /* typography — monospace everywhere. --font-sans is aliased to mono so the
      default Tailwind font stack is monospace too. */

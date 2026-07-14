@@ -23,8 +23,6 @@
     "vite.config.ts",
     "vitest.config.ts",
     "playwright.config.ts",
-    "eslint.config.js",
-    ".storybook/**/*.ts",
-    ".storybook/**/*.tsx"
+    "eslint.config.js"
   ]
 }
