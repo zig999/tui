@@ -152,3 +152,49 @@ body::after {
     content: none;
   }
 }
+
+/* ── Themes ───────────────────────────────────────────────────────────────
+  The @theme block above IS the default "phosphor" theme. Additional themes
+  override the SEMANTIC tokens under :root[data-theme="X"] (higher specificity
+  than :root, so they win) — components never change, only these variables.
+  Switch on the fly via <html data-theme="X"> (see Storybook toolbar).
+
+  Adding a theme = paste one block below with the 21 semantic tokens.
+  For a LIGHT theme, also set `color-scheme: light`, use dark text, and — since
+  CRT is a per-theme concern — disable the overlay/glow, e.g.:
+    :root[data-theme="latte"] { color-scheme: light; text-shadow: none; }
+    :root[data-theme="latte"] body::after { content: none; }
+*/
+
+/* Tema "Default" (Terminal.css) — dark, base ANSI estilo Dracula.
+   Direct values from Terminal.css where they exist; the 7 tokens with no
+   Terminal.css equivalent are derived and marked `derivado`. */
+:root[data-theme="default"] {
+  color-scheme: dark;
+
+  --color-background: #050505;
+  --color-surface: #000000;
+  --color-elevated: #111111; /* derivado: acima do surface */
+  --color-hover: #1a1a1a; /* derivado */
+  --color-zebra: #0c0c0c; /* derivado: listra sutil */
+  --color-muted: #0c0c0c; /* muted BG (nosso --color-muted é fundo) */
+
+  --color-foreground: #cccccc; /* terminal-fg */
+  --color-muted-foreground: #666666; /* muted */
+  --color-accent: #ffffff; /* headings brilhantes */
+
+  --color-primary: #8be9fd; /* cyan (primary do Default) */
+  --color-primary-foreground: #050505;
+  --color-primary-hover: #a6f0ff; /* derivado: + claro */
+  --color-primary-active: #66d3ec; /* derivado: + escuro */
+
+  --color-destructive: #ff5555; /* red */
+  --color-destructive-foreground: #050505;
+  --color-warning: #f1fa8c; /* yellow */
+  --color-info: #bd93f9; /* blue/purple */
+  --color-success: #50fa7b; /* green */
+
+  --color-border: #333333; /* border-color */
+  --color-border-strong: #555555; /* derivado */
+  --color-ring: #8be9fd;
+}
