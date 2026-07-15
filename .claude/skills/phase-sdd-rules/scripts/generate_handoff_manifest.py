@@ -203,15 +203,38 @@ def _approval_blocked(validation_dir: Path, scope: set[str] | None = None) -> li
     Scoped (fix F1/F3): on an `/u-improve`, only the domains the change touches
     can block the handoff. A stale handoff_allowed:false or a non_compliant
     verdict left in an untouched domain no longer blocks an unrelated change.
+
+    Fix F4 (incremental_back supersession): per-domain validation results written
+    with validation_mode=incremental_back intentionally carry handoff_allowed:false
+    (the front leg was still pending when they ran). When front-validation-result.yaml
+    exists and carries handoff_allowed:true, those per-domain false signals are
+    superseded — only the front-pass result is the terminal verdict.
     """
     reasons: list[str] = []
     if not validation_dir.exists():
         return reasons
+
+    # Detect front-pass clearance: front-validation-result.yaml present with
+    # handoff_allowed:true supersedes incremental_back domain results.
+    front_result = validation_dir / "front-validation-result.yaml"
+    front_cleared = False
+    if front_result.exists():
+        try:
+            front_text = front_result.read_text(encoding="utf-8")
+            if not _HANDOFF_ALLOWED_FALSE_RE.search(front_text):
+                front_cleared = True
+        except OSError:
+            pass
+
     for f in sorted(validation_dir.glob("*-validation-result.yaml")):
         if not _in_scope(f.name, scope):
             continue
         try:
-            if _HANDOFF_ALLOWED_FALSE_RE.search(f.read_text(encoding="utf-8")):
+            text = f.read_text(encoding="utf-8")
+            if _HANDOFF_ALLOWED_FALSE_RE.search(text):
+                if front_cleared and f.name != "front-validation-result.yaml":
+                    # incremental_back result superseded by the front-pass verdict
+                    continue
                 reasons.append(f"{f.name}: handoff_allowed=false")
         except OSError:
             continue
