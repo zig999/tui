@@ -1,7 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Copy, Files, HardDrive, Layers } from "lucide-react";
 import { expect, within } from "storybook/test";
 import { Panel } from "./panel";
+import { Banner } from "@/shared/components/ui/banner";
+import { StatPanel } from "@/shared/components/ui/stat-panel";
+import { StatusBar } from "@/shared/components/ui/status-bar";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+} from "@/shared/components/ui/tabs";
 
 const meta = {
   title: "Layout/Panel",
@@ -85,4 +93,90 @@ export const AriaLabelledByWiring: Story = {
     const iconWrapper = iconEl.closest("[aria-hidden='true']");
     await expect(iconWrapper).not.toBeNull();
   },
+};
+
+// ---------------------------------------------------------------------------
+// Dashboard — VISUAL VAULT integration composition (TC-07).
+// Mounts Banner + MenuBar (Tabs pipe strip) + a 2x2 StatPanel grid + a File
+// Types placeholder Panel + StatusBar in the canonical VISUAL VAULT layout.
+// Serves as the visual integration test for the complete dashboard shell.
+// See docs/specs/decisions.md — ADR-2026-07-14-01/02/03.
+// ---------------------------------------------------------------------------
+export const Dashboard: Story = {
+  parameters: { layout: "fullscreen" },
+  render: () => (
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <Banner
+        title="VISUAL VAULT"
+        subtitle="File organizer & duplicate finder"
+        action={
+          // ADR-2026-07-14-02: no Badge component — plain <span> pill only.
+          <span className="inline-flex items-center border border-border px-2 py-0.5 text-xs text-accent">
+            [Dashboard]
+          </span>
+        }
+      />
+
+      {/* MenuBar — ADR-2026-07-14-01: composed via Tabs, no dedicated MenuBar. */}
+      <div className="px-4 pt-4">
+        <Tabs defaultValue="dashboard">
+          <TabsList>
+            <TabsTrigger value="dashboard">DASHBOARD</TabsTrigger>
+            <span
+              aria-hidden="true"
+              className="select-none px-1 text-muted-foreground"
+            >
+              |
+            </span>
+            <TabsTrigger value="library">LIBRARY</TabsTrigger>
+            <span
+              aria-hidden="true"
+              className="select-none px-1 text-muted-foreground"
+            >
+              |
+            </span>
+            <TabsTrigger value="settings">SETTINGS</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+
+      <main className="flex flex-1 flex-col gap-4 p-4">
+        {/* 2x2 KPI grid. Accent mapping per spec §6 / TC-07 known_context. */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <StatPanel
+            title="Total Files"
+            icon={<Files className="inline size-4" />}
+            value={1234}
+            caption="arquivos"
+          />
+          <StatPanel
+            title="Total Size"
+            icon={<HardDrive className="inline size-4" />}
+            accent="info"
+            value="1.5 GB"
+            caption="in vault"
+          />
+          <StatPanel
+            title="Duplicates"
+            icon={<Copy className="inline size-4" />}
+            accent="warning"
+            value={42}
+            caption="detected"
+          />
+          <StatPanel
+            title="Media Types"
+            icon={<Layers className="inline size-4" />}
+            accent="alt"
+            value="12"
+            caption="unique"
+          />
+        </div>
+
+        {/* ADR-2026-07-14-03: File Types chart is out of scope — placeholder Panel. */}
+        <Panel title="File Types" />
+      </main>
+
+      <StatusBar left="Ready" right="12:34" />
+    </div>
+  ),
 };
