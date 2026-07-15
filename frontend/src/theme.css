@@ -35,6 +35,7 @@
   --color-term-cyan: #33e0e0; /* secondary accent — info / data */
   --color-term-red: #ff5555; /* error */
   --color-term-amber: #ffb000; /* warning */
+  --color-term-magenta: #ff66cc; /* alt accent — magenta/roxo (Media Types tile) */
 
   --color-term-border: #1f3d29; /* dim green rule */
 
@@ -51,6 +52,7 @@
 
   --color-destructive: var(--color-term-red);
   --color-destructive-foreground: var(--color-term-bg-0);
+  --color-accent-alt: var(--color-term-magenta); /* alternate accent — magenta phosphor (Panel/StatPanel/Banner accent="alt") */
 
   --color-warning: var(--color-term-amber);
 
@@ -190,6 +192,7 @@ body::after {
 
   --color-destructive: #ff5555; /* red */
   --color-destructive-foreground: #050505;
+  --color-accent-alt: #ff79c6; /* Dracula pink — alternate accent */
   --color-warning: #f1fa8c; /* yellow */
   --color-info: #bd93f9; /* blue/purple */
   --color-success: #50fa7b; /* green */
