@@ -1,0 +1,66 @@
+# Spec Validator — machine-readable result
+# Generated: 2026-07-15T01:12:00Z
+# Overwrite on every run — always reflects the most recent state.
+# Consumed by u-spec-orchestrator to make handoff decisions.
+
+validation:
+  domain: front
+  artifact_version: "1.0.0"
+  mode: final_complete
+  validated_by: u-spec-validator
+  timestamp: "2026-07-15T01:12:00Z"
+  layer: permanent
+
+status: VALID
+blocking_count: 0
+warning_count: 3
+
+# final_complete + VALID + blocking_count=0 => handoff_allowed: true
+handoff_allowed: true
+
+blocking_issues: []
+
+warnings:
+  - id: WARN-001
+    type: coverage
+    source: docs/specs/front/components/stat-panel.component.spec.md, docs/specs/front/components/banner.component.spec.md, docs/specs/front/components/status-bar.component.spec.md, docs/specs/front/components/menubar.component.spec.md
+    description: >
+      Four of the five Panel-family component specs remain at Status: draft
+      (StatPanel v1.0.0, Banner v1.1.0, StatusBar v1.2.0, MenuBar v1.0.0)
+      while Panel is promoted to Status: approved (v1.0.1). Inconsistent
+      approval status across the Panel family. The specs are content-complete
+      and internally consistent — the draft status reflects that a formal
+      spec-review pass has not yet been run on these four components. No
+      implementation blocker; dev can proceed from draft specs. Recommend
+      running the spec reviewer on the four draft specs to align the family
+      at a uniform approval level.
+
+  - id: WARN-002
+    type: cross-ref
+    source: docs/specs/front/components/status-bar.component.spec.md §10
+    description: >
+      The Storybook location rationale in status-bar.component.spec.md §10
+      reads: "grouped with the other shell / dashboard-shell components rather
+      than under `Feedback/` (where `Alert`/`Banner` live)". This incorrectly
+      places Banner in the Feedback/ section. Both front.md §2 taxonomy and
+      banner.component.spec.md §11 explicitly place Banner under `Layout/`
+      alongside Panel, StatPanel, and StatusBar. The parenthetical rationale
+      is misleading; the actual Storybook meta title `Layout/StatusBar` is
+      correct and will not cause implementation errors. Responsible: Front
+      Spec Agent — update the parenthetical in §10 to reference only `Alert`
+      and `Empty` as Feedback/ residents, removing the incorrect Banner
+      mention.
+
+  - id: WARN-003
+    type: coverage
+    source: docs/specs/front/front.md §2
+    description: >
+      front.md §2 Storybook taxonomy table is incomplete relative to
+      design-system/components.md §12 catalog. Missing from the taxonomy:
+      Table (Data Display), Switch (Forms), Textarea (Forms), Tooltip
+      (Overlays). These are pre-existing components reverse-engineered from
+      code before this requirement was opened; they are fully cataloged in
+      components.md but absent from front.md §2's section-component mapping.
+      No impact on the Panel-family implementation (all five new components
+      are correctly listed). Recommend updating front.md §2 in a follow-up
+      pass to achieve a complete global taxonomy.

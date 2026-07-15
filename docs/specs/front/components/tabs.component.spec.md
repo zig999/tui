@@ -119,6 +119,32 @@ No `cva()` block exists in this component — there is no `variant`/`size` prop 
 |---------|------|----------------|
 | — | — | Not applicable — no variant axis exists in the code |
 
+### Compositional pattern — MenuBar (`A | B | C` strip)
+
+The TUI menu-bar identity (`A | B | C` with the active item highlighted) is
+achieved as a **composition of `Tabs`**, not a new component and not a
+`variant` prop. Consumers interleave `<span aria-hidden="true">|</span>`
+nodes between adjacent `TabsTrigger`s inside a `TabsList`:
+
+```tsx
+<Tabs defaultValue="dashboard">
+  <TabsList>
+    <TabsTrigger value="dashboard">DASHBOARD</TabsTrigger>
+    <span aria-hidden="true" className="text-muted-foreground select-none">|</span>
+    <TabsTrigger value="library">LIBRARY</TabsTrigger>
+    <span aria-hidden="true" className="text-muted-foreground select-none">|</span>
+    <TabsTrigger value="settings">SETTINGS</TabsTrigger>
+  </TabsList>
+</Tabs>
+```
+
+Rationale, alternatives considered, and the "revisit when" condition are
+recorded in `docs/specs/decisions.md` (ADR-2026-07-14-01). The composition
+is demonstrated in `tabs.stories.tsx` (story name: `MenuBarStyle`, title
+category `Navigation/Tabs`) and in the Dashboard composition story
+(`Layout/Panel — Dashboard`). See `menubar.component.spec.md` for the
+consumer-facing usage contract.
+
 ---
 
 ## 7. Do / Don't
@@ -187,3 +213,4 @@ No Radix or other UI-kit component dependency — this compound is built entirel
 | Version | Date | Author | Type | Description | CR |
 |---------|------|--------|------|-------------|----|
 | 1.0.0 | 2026-07-14 | Reverse Spec Writer | initial | Initial version | -- |
+| 1.0.1 | 2026-07-14 | Spec Writer | patch | Documents the `MenuBar` compositional pattern in §6 (pipe separators interleaved as `aria-hidden` spans). No API/props change. Decision reference: `docs/specs/decisions.md` ADR-2026-07-14-01 | -- |

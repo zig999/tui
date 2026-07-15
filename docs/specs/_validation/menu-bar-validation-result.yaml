@@ -1,0 +1,54 @@
+# Spec Validator — machine-readable result
+# Generated: 2026-07-15T00:51:30Z
+# Overwrite on every run — always reflects the most recent state.
+
+validation:
+  domain: menu-bar
+  artifact_version: "1.0.0"
+  mode: incremental_back
+  validated_by: u-spec-validator
+  timestamp: "2026-07-15T00:51:30Z"
+  layer: permanent
+
+status: VALID
+blocking_count: 0
+warning_count: 2
+
+# incremental_back => handoff_allowed is always false (front leg still pending)
+handoff_allowed: false
+
+blocking_issues: []
+
+warnings:
+  - id: WARN-001
+    type: cross-ref
+    source: docs/specs/front/components/tabs.component.spec.md §6
+    description: >
+      The canonical composition example in tabs.component.spec.md §6
+      (Compositional pattern — MenuBar) renders the pipe span as
+      className="text-muted-foreground select-none" — omitting the px-1
+      spacing class. The authoritative MenuBar contract (menubar.component.spec.md
+      §3 className row, menubar.back.md §4.2 class contract table, and
+      decisions.md ADR-2026-07-14-01 consequence block) all specify
+      className="select-none text-muted-foreground px-1" as the single source of
+      truth. The tabs.component.spec.md §6 example is stale: it was written
+      before px-1 was established as the breathing-room requirement. No
+      implementation impact (developer follows menubar.component.spec.md as the
+      primary reference), but the stale example in the Tabs spec could cause
+      confusion for future readers. Responsible: Spec Writer to align
+      tabs.component.spec.md §6 with the MenuBar spec.
+
+  - id: WARN-002
+    type: cross-ref
+    source: docs/specs/front/components/menubar.back.md
+    description: >
+      The back spec header references "menubar.component.spec.md" as its
+      business spec without pinning a version number. The component spec is
+      currently at version 1.0.0 (status: draft). Both documents are in sync at
+      v1.0.0 and there is no props-contract delta, so there is no implementation
+      risk. However, pinning the version (e.g. "Business spec:
+      menubar.component.spec.md v1.0.0") is the traceability convention used
+      consistently across the spec suite and enables reliable changelog-based
+      drift detection if the component spec is later updated independently.
+      Responsible: Back Spec Agent to add the version pin in the header on the
+      next revision.

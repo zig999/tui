@@ -1,0 +1,26 @@
+validation:
+  domain: panel
+  artifact_version: "1.0.0"
+  mode: incremental_back
+  validated_by: u-spec-validator
+  timestamp: "2026-07-15T00:22:30Z"
+  layer: permanent
+
+status: VALID
+blocking_count: 0
+warning_count: 1
+handoff_allowed: false
+
+blocking_issues: []
+
+warnings:
+  - id: WARN-001
+    type: cross-ref
+    source: docs/specs/front/components/panel.back.md
+    description: >
+      Back spec declares Version 1.0.0 / Status draft and references
+      panel.component.spec.md without a pinned version. The component spec
+      was subsequently updated to v1.0.1 / approved (editorial changes only
+      — no Props Contract delta). The back spec should reference the approved
+      v1.0.1 and its own status should be promoted to approved after review.
+      No implementation impact because the v1.0.1 changes are editorial.

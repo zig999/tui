@@ -1,0 +1,31 @@
+validation:
+  domain: design-system-tokens
+  artifact_version: "1.0.0"
+  mode: incremental_back
+  validated_by: u-spec-validator
+  timestamp: "2026-07-15T00:51:47Z"
+  layer: permanent
+
+status: VALID
+blocking_count: 0
+warning_count: 1
+handoff_allowed: false
+
+blocking_issues: []
+
+warnings:
+  - id: WARN-001
+    type: cross-ref
+    source: docs/specs/front/design-system/tokens.back.md
+    description: >
+      Internal placement contradiction in tokens.back.md §2.1. The first paragraph
+      states the token should be inserted "immediately after the existing intent accents
+      (--color-info, --color-success) and before the primary interaction states", and the
+      code snippet shows it placed BEFORE --color-warning and --color-destructive.
+      However, the explicit placement rule in the same section states it "Must appear
+      after the four existing intent tokens (--color-info, --color-success,
+      --color-warning, --color-destructive)". The tokens.md §1.4 table ordering (accent-alt
+      listed last in the intent section, after --color-destructive-foreground) is consistent
+      with the placement rule but contradicts the "immediately after info/success" text and
+      the code snippet. A developer following the text/snippet would place the token in a
+      different position than a developer following the placement rule and tokens.md catalog.

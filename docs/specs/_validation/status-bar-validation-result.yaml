@@ -1,0 +1,39 @@
+validation:
+  domain: status-bar
+  artifact_version: "1.0.0"
+  mode: incremental_back
+  validated_by: u-spec-validator
+  timestamp: "2026-07-15T00:39:36Z"
+  layer: permanent
+
+status: VALID
+
+blocking_count: 0
+warning_count: 2
+handoff_allowed: false
+
+blocking_issues: []
+
+warnings:
+  - id: WARN-001
+    type: cross-ref
+    source: docs/specs/front/components/status-bar.back.md §4.2
+    description: >
+      Slot region class ordering differs between the two specs.
+      status-bar.component.spec.md §6 lists "flex-1 flex items-center justify-start gap-2"
+      while status-bar.back.md §4.2 lists "flex flex-1 items-center justify-start gap-2"
+      (and similarly for center/right regions). The two orderings are functionally
+      identical in Tailwind v4 (different CSS properties, no conflict), but the specs
+      should use identical strings to avoid confusion during implementation.
+
+  - id: WARN-002
+    type: coverage
+    source: docs/specs/front/components/status-bar.back.md (header)
+    description: >
+      Back spec header references the component spec by filename only
+      ("Business spec: status-bar.component.spec.md") without pinning a version.
+      The component spec advanced from the initial draft to v1.2.0 on the same day the
+      back spec was authored (2026-07-14). The back spec content is consistent with
+      v1.2.0 (includes DecorativeRole story and BDD §8 reference), but the binding is
+      implicit. Future updates to the component spec could silently drift from the back
+      spec without a version-pin to flag the mismatch.

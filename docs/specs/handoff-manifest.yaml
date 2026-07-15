@@ -1,0 +1,106 @@
+handoff:
+  id: HANDOFF-20260715-011847
+  delivered_by: u-spec-orchestrator
+  delivered_at: "2026-07-15T01:18:47Z"
+  layer: semi-permanent
+  type: new_domain
+domains: []
+backend_package: []
+frontend_artifacts:
+  front_md_version: 1.0.0
+  features: []
+  flows: []
+frontend_package:
+  - path: docs/specs/front/front.md
+    artifact: front
+    sha256: 3deaba562a75baae0639866191ebb82f80d5afa04daf5e6b0eeaafb9d500c780
+  - path: docs/specs/front/components/alert.component.spec.md
+    artifact: component-spec
+    sha256: 31e48d6bea21349b92ab165e137b05dba824cdeca1bbacd35818243ed6ee48d0
+  - path: docs/specs/front/components/banner.component.spec.md
+    artifact: component-spec
+    sha256: a0bb087f1b270fddcab9f9a69085ebf0725d6c3a8a2f5118be85b585e8600993
+  - path: docs/specs/front/components/breadcrumb.component.spec.md
+    artifact: component-spec
+    sha256: 2ee1b29f094362ad4ffea61e2fd5f422146c4b2340fd89937d865f9ee5cd95fd
+  - path: docs/specs/front/components/button.component.spec.md
+    artifact: component-spec
+    sha256: 9c067e4ac8859e3f1bc4d395370757175aa1996639e992f38860d63ade83aec7
+  - path: docs/specs/front/components/card.component.spec.md
+    artifact: component-spec
+    sha256: 9ae5e1f3ad71018e76a123ac02b8a21d9b94a4c4eac0eddb9be6ad0b04f48c7e
+  - path: docs/specs/front/components/checkbox.component.spec.md
+    artifact: component-spec
+    sha256: 1edd78c186543f5d7091156e290cc10d5b6923e53faf235480cc8099523be195
+  - path: docs/specs/front/components/date-picker.component.spec.md
+    artifact: component-spec
+    sha256: ea32fe44628e3236c89a4041446af9977e6ed6014aa7f668dfd72e129f8df468
+  - path: docs/specs/front/components/dialog.component.spec.md
+    artifact: component-spec
+    sha256: 71d59f41c01350cfe00c4f9fda5577addfdb22152c08a5aa86c1e266f093c9c9
+  - path: docs/specs/front/components/divider.component.spec.md
+    artifact: component-spec
+    sha256: 707dc687a77c826235bdf0ff6426f45cd9e673adba9a86e5134eb3a5a0d6410b
+  - path: docs/specs/front/components/empty.component.spec.md
+    artifact: component-spec
+    sha256: fbdef86522e2f116dc4c751f210eaf9b8bf7ac1b8d60196720c21308c97670b5
+  - path: docs/specs/front/components/input.component.spec.md
+    artifact: component-spec
+    sha256: b843ed09bed6e81237e39a059cfa75d06074dce203d94279cd9c16174ac65188
+  - path: docs/specs/front/components/kbd.component.spec.md
+    artifact: component-spec
+    sha256: 536312e7edc6573754d33fb4314abe09d18a6e001eac0d85623fb3d5205b6d3c
+  - path: docs/specs/front/components/label.component.spec.md
+    artifact: component-spec
+    sha256: 8c125797008cc1272d2ad6ab9785dcfb1c324a4508995c05cf6109135d407b33
+  - path: docs/specs/front/components/link.component.spec.md
+    artifact: component-spec
+    sha256: ba68436e25ebeca44280a7d881e8da26124bda6fc269a6cc870e018710828e28
+  - path: docs/specs/front/components/menubar.component.spec.md
+    artifact: component-spec
+    sha256: 64ecc4fb4b9a7e2694e39c89004b3fc7895e0e7c1e5dfb11abc2ece570bf1516
+  - path: docs/specs/front/components/multi-combobox.component.spec.md
+    artifact: component-spec
+    sha256: 96fcf17941d5f41f3064b4901b0a39f005ea108b9b99a917ef354ec58bf2e9ea
+  - path: docs/specs/front/components/panel.component.spec.md
+    artifact: component-spec
+    sha256: 6429f5d81cc67c771ac14825fa7fab35e03735fb2b1b35249301ef5c3c65db35
+  - path: docs/specs/front/components/person-picker.component.spec.md
+    artifact: component-spec
+    sha256: 8b40e81714cf6534215ee589f5c404df8c01a3065c9403ad2ef25dc445f4bd02
+  - path: docs/specs/front/components/progress.component.spec.md
+    artifact: component-spec
+    sha256: 7d6212fca1c05d2938d19bcc7ebadd0bdb190c848080acf798565e2a1390b090
+  - path: docs/specs/front/components/radio-group.component.spec.md
+    artifact: component-spec
+    sha256: aaeec4680147a60f0ae9643e0be1f70a8627264481c8bbae2c6f010eb30abfcb
+  - path: docs/specs/front/components/select.component.spec.md
+    artifact: component-spec
+    sha256: 255972aea2c6a0dc3d117c11d0b18cd71198f7b56d93a89140b513cd33297e48
+  - path: docs/specs/front/components/sheet.component.spec.md
+    artifact: component-spec
+    sha256: 34884d36b37628c39490df4d4650dc15697aea49e4b45a0f0364e89a0bdd3d24
+  - path: docs/specs/front/components/skeleton.component.spec.md
+    artifact: component-spec
+    sha256: 19322277bc3abce43ba5d1fe70bb12ef0a3d88b7ede8bd68284e70a2284b1101
+  - path: docs/specs/front/components/stat-panel.component.spec.md
+    artifact: component-spec
+    sha256: 8a130880ab93a210daad13453a4def95a63007c0d21687e6be280aaf9850a95d
+  - path: docs/specs/front/components/status-bar.component.spec.md
+    artifact: component-spec
+    sha256: 3c84a529f60f8f60987403aa24b890fa479a59543109b0344ab4864adb3bb451
+  - path: docs/specs/front/components/switch.component.spec.md
+    artifact: component-spec
+    sha256: 7992ba17ccae5258fb95df0ad0d4c0ed08a332b3d4805f3c87ae9daefafcec08
+  - path: docs/specs/front/components/table.component.spec.md
+    artifact: component-spec
+    sha256: 4268c8050a73bd8a024c1233104523881deb7b94ced1aad6277135444541cfce
+  - path: docs/specs/front/components/tabs.component.spec.md
+    artifact: component-spec
+    sha256: 02f92151f01d44ad1427477b6cd8f31b6c8bce40b80ce43dec6b874a314a7452
+  - path: docs/specs/front/components/textarea.component.spec.md
+    artifact: component-spec
+    sha256: ec4bf0ffca02f7df70d3cada83a32f1e37bfa36e2bdb73814340e63ed84838f7
+  - path: docs/specs/front/components/tooltip.component.spec.md
+    artifact: component-spec
+    sha256: 477b69039c3d096618747083211f23eb406226640420cbe0818e320b047c2e13

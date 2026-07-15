@@ -1,0 +1,52 @@
+# Spec Validator — machine-readable result
+# Generated: 2026-07-15T00:39:53Z
+# Overwrite on every run — always reflects the most recent state.
+
+validation:
+  domain: banner
+  artifact_version: "1.0.0"
+  mode: incremental_back
+  validated_by: u-spec-validator
+  timestamp: "2026-07-15T00:39:53Z"
+  layer: permanent
+
+status: VALID
+blocking_count: 0
+warning_count: 2
+
+# incremental_back => handoff_allowed is always false (front leg still pending)
+handoff_allowed: false
+
+blocking_issues: []
+
+warnings:
+  - id: WARN-001
+    type: cross-ref
+    source: docs/specs/front/components/banner.component.spec.md §8
+    description: >
+      The BDD scenario "Notched frame" in component spec §8 states "the outer
+      <section>'s aria-labelledby resolves to that <h1>'s id" — implying the
+      <section> is labeled by Banner's inner visible <h1> (the titleId generated
+      by useId()). However, back spec §4.3 and BR-06 establish that the inner
+      <h*> is aria-hidden="true" unconditionally in the notched branch, and that
+      the <section>'s aria-labelledby is owned by Panel and points to Panel's
+      notched heading — NOT to Banner's inner heading. The titleId is explicitly
+      documented as "not used for labelling in this spec" (reserved for future
+      use). The component spec's BDD scenario is therefore stale relative to the
+      back spec's a11y resolution. Implementation will be correct following the
+      back spec; the component spec §8 notched scenario and §9 a11y contract
+      should be updated to reflect the resolved decision. Responsible: Back Spec
+      Agent (owns the resolution) to align the component spec, or Spec Writer to
+      update the stale BDD.
+
+  - id: WARN-002
+    type: cross-ref
+    source: docs/specs/front/components/banner.back.md
+    description: >
+      The back spec declares version 1.0.0 and references "banner.component.spec.md"
+      without pinning a version number. The component spec is currently at version
+      1.1.0 (updated 2026-07-14 to add §11 Storybook Location and §12 Delivery
+      Contract). The back spec covers equivalent content in §7 (Storybook stories)
+      and §2 (File Layout), so there is no implementation gap. However, the
+      back spec header should reference the current component spec version (1.1.0)
+      to maintain traceability and prevent future drift. No implementation impact.

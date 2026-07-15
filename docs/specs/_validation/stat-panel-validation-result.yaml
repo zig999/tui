@@ -1,0 +1,33 @@
+# Spec Validator — machine-readable result
+# Generated: 2026-07-15T00:23:00Z
+# Overwrite on every run — always reflects the most recent state.
+
+validation:
+  domain: stat-panel
+  artifact_version: "1.0.0"
+  mode: incremental_back
+  validated_by: u-spec-validator
+  timestamp: "2026-07-15T00:23:00Z"
+  layer: permanent
+
+status: VALID
+blocking_count: 0
+warning_count: 1
+
+# incremental_back => handoff_allowed is always false (front leg still pending)
+handoff_allowed: false
+
+blocking_issues: []
+
+warnings:
+  - id: WARN-001
+    type: cross-ref
+    source: docs/specs/front/components/stat-panel.component.spec.md §10
+    description: >
+      spec.md §10 (Internal Dependencies) describes cn() usage as "Merges consumer
+      className with the value/caption body classes." However, back.md §7 clarifies
+      that cn() is not required in stat-panel.tsx: className is forwarded directly to
+      <Panel> without merging, and the body wrapper receives only hard-coded classes
+      (CR-02). The spec.md description is slightly inaccurate but does not affect
+      implementation correctness — back.md §7 is the authoritative source for
+      implementation decisions. No developer will be misled.
