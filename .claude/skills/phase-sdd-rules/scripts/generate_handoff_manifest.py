@@ -293,10 +293,57 @@ def _blocked(reason: str, **extra) -> dict:
     return {"status": "blocked", "check": CHECK_ID, "reason": reason, **extra}
 
 
+def _generate_fe_only(
+    project_dir: Path, specs_dir: Path, workflow_id: str,
+    frontend_artifacts: dict, frontend_package: list,
+) -> dict:
+    """Frontend-only manifest path: no backend domain dirs found but front.md exists."""
+    scope = affected_domains(project_dir, workflow_id)
+    block_reasons = _approval_blocked(specs_dir / "_validation", scope)
+    if block_reasons:
+        return _blocked("approval_blocked", detail=block_reasons, manifest_path=None)
+
+    triage, triage_reason = _read_triage(project_dir, workflow_id)
+    htype = _handoff_type(triage)
+    now = datetime.now(timezone.utc)
+    manifest: dict = {
+        "handoff": {
+            "id": now.strftime("HANDOFF-%Y%m%d-%H%M%S"),
+            "delivered_by": "u-spec-orchestrator",
+            "delivered_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "layer": "semi-permanent",
+            "type": htype,
+        },
+        "domains": [],
+        "backend_package": [],
+        "frontend_artifacts": frontend_artifacts,
+        "frontend_package": frontend_package,
+    }
+    if htype != "new_domain":
+        manifest["change_summary"] = _change_summary(triage, htype)
+    manifest_path = specs_dir / "handoff-manifest.yaml"
+    manifest_path.write_text(_to_yaml(manifest), encoding="utf-8")
+    return {
+        "status": "ok",
+        "check": CHECK_ID,
+        "manifest_path": str(manifest_path),
+        "manifest_id": manifest["handoff"]["id"],
+        "domains": [],
+        "stack_implied": "fe",
+        "reason": triage_reason,
+    }
+
+
 def generate(project_dir: Path, specs_dir: Path, workflow_id: str) -> dict:
     domain_dirs = sorted(p.parent for p in specs_dir.glob("domains/*/openapi.yaml"))
     if not domain_dirs:
-        return _blocked("no_domains_found", manifest_path=None)
+        # Pure-frontend project: block only if front.md is also absent.
+        frontend_artifacts, frontend_package = _frontend(specs_dir, project_dir)
+        if frontend_artifacts is None:
+            return _blocked("no_domains_found", manifest_path=None)
+        return _generate_fe_only(
+            project_dir, specs_dir, workflow_id, frontend_artifacts, frontend_package
+        )
 
     scope = affected_domains(project_dir, workflow_id)
     block_reasons = _approval_blocked(specs_dir / "_validation", scope)

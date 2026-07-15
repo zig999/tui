@@ -88,11 +88,11 @@ def validate(manifest: dict, specs_dir: Path, caller: str) -> dict:
     # HDF-010 — handoff type enum
     if htype not in _HANDOFF_TYPES:
         errors.append(f'HDF-010: handoff.type "{htype}" not in {sorted(_HANDOFF_TYPES)}')
-    # FLOW-031 — at least one domain
-    if not domains:
+    # FLOW-031 — at least one domain (waived for pure-FE manifests that include frontend_package)
+    if not domains and not frontend:
         errors.append("FLOW-031: handoff must contain at least one domain")
-    # FLOW-032 — at least one backend_package entry
-    if not backend:
+    # FLOW-032 — at least one backend_package entry (waived for pure-FE manifests)
+    if not backend and not frontend:
         errors.append("FLOW-032: handoff must include at least one backend_package entry")
     # FLOW-033 — new_domain must NOT carry change_summary
     if htype == "new_domain" and change is not None:
